@@ -1,0 +1,56 @@
+{
+  "version": "2026.10.1",
+  "source": "https://microsoft.github.io/AgentPlatformAdvisor/",
+  "outcomes": [
+    { "code": "m365-copilot",   "family": "use",   "name": "Microsoft 365 Copilot", "summary": "Get answers, draft content, and surface insights with AI chat and built-in agents", "estimatorHarness": null },
+    { "code": "cowork",         "family": "use",   "name": "Cowork", "summary": "Delegate multi-step Microsoft 365 work, including schedules, event triggers, and approvals", "estimatorHarness": "cowork" },
+    { "code": "scout",          "family": "use",   "name": "Scout", "summary": "Always-on personal Autopilot across desktop, browser, local files, and Microsoft 365", "estimatorHarness": null },
+    { "code": "agent-builder",  "family": "build", "name": "Agent Builder", "summary": "Build declarative agents inside Microsoft 365 Copilot using natural language", "estimatorHarness": null },
+    { "code": "copilot-studio", "family": "build", "name": "Copilot Studio", "summary": "Create custom agents with natural language or a graphical interface", "estimatorHarness": "copilot-studio-standard", "followUp": "Ask whether the agent will run on the standard harness or the GitHub Copilot harness; this selects the estimator." },
+    { "code": "foundry",        "family": "build", "name": "Microsoft Foundry", "summary": "Develop agents on a pro-code platform with full control over engines, models, and Azure-scale infrastructure", "estimatorHarness": null }
+  ],
+  "questions": [
+    { "id": "start", "text": "What do you want to do?", "options": [
+      { "code": "use",     "text": "Get work done with an agent", "next": "use.style" },
+      { "code": "build",   "text": "Build my own agent", "next": "build.skill" },
+      { "code": "explore", "text": "I'm exploring what's possible with agents", "next": null, "outcome": "explore" } ] },
+
+    { "id": "use.style", "text": "How do you want the work to happen?", "options": [
+      { "code": "interactive", "text": "I'll ask questions and work through it myself", "next": "use.shape" },
+      { "code": "handoff",     "text": "Hand off the whole task and give me the result", "next": "use.shape" } ] },
+    { "id": "use.shape", "text": "What kind of work is it?", "options": [
+      { "code": "general",     "text": "General help - brainstorm, find info, catch up on email or meetings, draft and edit documents", "next": "use.scope" },
+      { "code": "specialized", "text": "Interactive specialized work - deep research, data analysis, meeting facilitation, or translation while I stay in the loop", "next": "use.scope" },
+      { "code": "oneshot",     "text": "One-shot deliverable - finish a multi-step job and hand back the result", "next": "use.scope" },
+      { "code": "recurring",   "text": "Recurring or event-triggered - schedules, inbox/Teams triggers, or repeating briefings", "next": "use.scope" },
+      { "code": "autopilot",   "text": "Always-on personal Autopilot - proactive monitoring and follow-through over time", "next": "use.scope" },
+      { "code": "unsure",      "text": "Not sure yet", "next": "use.scope" } ] },
+    { "id": "use.scope", "text": "Where does the work live?", "options": [
+      { "code": "m365",   "text": "Inside Microsoft 365 - email, meetings, files, Teams", "next": null },
+      { "code": "beyond", "text": "Microsoft 365 plus my desktop, browser, local files, and command line", "next": null },
+      { "code": "unsure", "text": "Not sure yet", "next": null } ] },
+
+    { "id": "build.skill", "text": "How do you want to build?", "options": [
+      { "code": "natural-language", "text": "Describe it in natural language inside Microsoft 365 Copilot", "next": "build.needs" },
+      { "code": "low-code",         "text": "Natural language or a graphical designer, with connectors, flows and channels", "next": "build.needs" },
+      { "code": "pro-code",         "text": "Code, with full control over models, orchestration and infrastructure", "next": "build.needs" } ] },
+    { "id": "build.needs", "text": "What does the agent need to do?", "options": [
+      { "code": "knowledge",  "text": "Answer from knowledge sources and documents", "next": null },
+      { "code": "actions",    "text": "Take actions: tools, flows, connectors, MCP servers, autonomous triggers", "next": null },
+      { "code": "custom-ai",  "text": "Custom models, evaluation pipelines or multi-agent orchestration at Azure scale", "next": null } ] }
+  ],
+  "rules": [
+    { "when": { "use.shape": ["general"] },                       "outcome": "m365-copilot" },
+    { "when": { "use.shape": ["specialized"] },                   "outcome": "m365-copilot" },
+    { "when": { "use.shape": ["oneshot", "recurring"] },          "outcome": "cowork" },
+    { "when": { "use.shape": ["autopilot"] },                     "outcome": "scout" },
+    { "when": { "use.shape": ["unsure"], "use.scope": ["beyond"] }, "outcome": "scout" },
+    { "when": { "use.shape": ["unsure"], "use.style": ["handoff"] }, "outcome": "cowork" },
+    { "when": { "use.shape": ["unsure"] },                        "outcome": "m365-copilot" },
+    { "when": { "build.skill": ["pro-code"] },                    "outcome": "foundry" },
+    { "when": { "build.needs": ["custom-ai"] },                   "outcome": "foundry" },
+    { "when": { "build.skill": ["natural-language"], "build.needs": ["knowledge"] }, "outcome": "agent-builder" },
+    { "when": { "build.skill": ["natural-language", "low-code"] }, "outcome": "copilot-studio" }
+  ],
+  "note": "The 'use' branch mirrors the live advisor. The 'build' branch questions are derived from the advisor's platform descriptions and must be verified against the site; rules evaluate top to bottom, first match wins."
+}
