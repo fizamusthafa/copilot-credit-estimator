@@ -1,0 +1,27 @@
+{
+  "version": "2026.10.1",
+  "harnesses": [
+    { "code": "copilot-studio-standard", "name": "Copilot Studio - standard harness", "estimator": "agent" },
+    { "code": "copilot-studio-github",   "name": "Copilot Studio - GitHub Copilot harness", "estimator": "product" },
+    { "code": "cowork",                  "name": "Cowork", "estimator": "product" },
+    { "code": "contact-center-intelligence", "name": "Contact Center Intelligence", "estimator": "product" },
+    { "code": "teams-phone-agent",       "name": "Teams Phone Agent", "estimator": "product" },
+    { "code": "copilot-managed-runtime", "name": "Copilot Managed Runtime for Apps", "estimator": "product" },
+    { "code": "workiq-api",              "name": "WorkIQ API", "estimator": "product" },
+    { "code": "copilot-code-forecast",   "name": "Copilot Code Forecast", "estimator": "product" }
+  ],
+  "toolTypes": ["Prompt", "Agent flow", "Computer use", "Custom connector", "Model Context Protocol", "REST API"],
+  "promptTiers": ["Basic", "Standard", "Premium"],
+  "personas": [
+    { "code": "light", "name": "Light user", "description": "Occasional use, a few sessions per month" },
+    { "code": "core",  "name": "Core user",  "description": "Daily use, several sessions per day" },
+    { "code": "power", "name": "Power user", "description": "Heavy, continuous use" }
+  ],
+  "modalities": ["chat", "voice", "api", "background"],
+  "complexityBands": [
+    { "code": "low",    "name": "Low",    "description": "Single-turn, at most one tool" },
+    { "code": "medium", "name": "Medium", "description": "Multi-turn, 2-4 tools or knowledge lookups" },
+    { "code": "high",   "name": "High",   "description": "Long-running, many tools, reasoning-heavy" }
+  ],
+  "note": "Personas, modalities and bands for the product estimator must be verified against the live multi-product estimator before rate values are filled in."
+}
