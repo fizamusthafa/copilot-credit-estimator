@@ -1,0 +1,28 @@
+{
+  "version": "2026.10.1",
+  "currency": "USD",
+  "creditUnitPrice": 0.01,
+  "sources": [
+    "https://microsoft.github.io/copilot-studio-estimator/",
+    "https://nptnlopppecostweb.azurewebsites.net/#/estimator"
+  ],
+  "disclaimer": "Informational estimate only. Not a binding offer nor a guarantee of final cost. Actual consumption varies by region, workload, users and other factors.",
+  "effectiveFrom": "2026-10-01",
+  "effectiveTo": null,
+  "meters": [
+    { "code": "CS_STD_TOOL_INVOCATION",  "harness": "copilot-studio-standard", "name": "Agent tool invocation (Prompt, Agent flow, Computer use, Custom connector, MCP, REST API)", "unit": "invocation per user", "credits": 5,    "licenseNegatable": true,  "status": "published" },
+    { "code": "CS_STD_FLOW_ACTION",      "harness": "copilot-studio-standard", "name": "Agent flow action", "unit": "action", "credits": 0.13, "licenseNegatable": false, "status": "published", "note": "13 credits per 100 actions; fixed cost regardless of users." },
+    { "code": "CS_STD_KNOWLEDGE_TENANT", "harness": "copilot-studio-standard", "name": "Knowledge response with tenant graph grounding (Enhanced Search on)", "unit": "response", "credits": null, "licenseNegatable": true, "status": "to-confirm" },
+    { "code": "CS_STD_KNOWLEDGE_OTHER",  "harness": "copilot-studio-standard", "name": "Knowledge response, non-tenant grounding (Dataverse, web, files)", "unit": "response", "credits": null, "licenseNegatable": true, "status": "to-confirm" },
+    { "code": "CS_STD_PROMPT_BASIC",     "harness": "copilot-studio-standard", "name": "Prompt modifier - Basic",    "unit": "prompt run", "credits": null, "licenseNegatable": true, "status": "to-confirm" },
+    { "code": "CS_STD_PROMPT_STANDARD",  "harness": "copilot-studio-standard", "name": "Prompt modifier - Standard", "unit": "prompt run", "credits": null, "licenseNegatable": true, "status": "to-confirm" },
+    { "code": "CS_STD_PROMPT_PREMIUM",   "harness": "copilot-studio-standard", "name": "Prompt modifier - Premium",  "unit": "prompt run", "credits": null, "licenseNegatable": true, "status": "to-confirm" },
+    { "code": "CS_GH_SESSION",           "harness": "copilot-studio-github",   "name": "GitHub Copilot harness - session by complexity band", "unit": "session", "credits": null, "bands": { "low": null, "medium": null, "high": null }, "status": "to-confirm" },
+    { "code": "COWORK_TASK",             "harness": "cowork",                  "name": "Cowork - delegated task by complexity band", "unit": "task", "credits": null, "bands": { "low": null, "medium": null, "high": null }, "status": "to-confirm" },
+    { "code": "CCI_CONVERSATION",        "harness": "contact-center-intelligence", "name": "Contact Center Intelligence - conversation by modality", "unit": "conversation", "credits": null, "modalities": { "chat": null, "voice": null }, "status": "to-confirm" },
+    { "code": "TEAMS_PHONE_CALL",        "harness": "teams-phone-agent",       "name": "Teams Phone Agent - handled call", "unit": "call", "credits": null, "status": "to-confirm" },
+    { "code": "CMR_APPS_REQUEST",        "harness": "copilot-managed-runtime", "name": "Copilot Managed Runtime for Apps - request", "unit": "request", "credits": null, "status": "to-confirm" },
+    { "code": "WORKIQ_API_CALL",         "harness": "workiq-api",              "name": "WorkIQ API - call", "unit": "call", "credits": null, "status": "to-confirm" },
+    { "code": "CODE_FORECAST_RUN",       "harness": "copilot-code-forecast",   "name": "Copilot Code Forecast - run", "unit": "run", "credits": null, "status": "to-confirm" }
+  ]
+}
