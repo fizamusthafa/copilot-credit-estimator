@@ -1,56 +1,873 @@
 {
-  "version": "2026.10.1",
+  "version": "2026.10.2",
   "source": "https://microsoft.github.io/AgentPlatformAdvisor/",
+  "sourceVersion": "1.4",
+  "guidanceVerified": "2026-08",
   "outcomes": [
-    { "code": "m365-copilot",   "family": "use",   "name": "Microsoft 365 Copilot", "summary": "Get answers, draft content, and surface insights with AI chat and built-in agents", "estimatorHarness": null },
-    { "code": "cowork",         "family": "use",   "name": "Cowork", "summary": "Delegate multi-step Microsoft 365 work, including schedules, event triggers, and approvals", "estimatorHarness": "cowork" },
-    { "code": "scout",          "family": "use",   "name": "Scout", "summary": "Always-on personal Autopilot across desktop, browser, local files, and Microsoft 365", "estimatorHarness": null },
-    { "code": "agent-builder",  "family": "build", "name": "Agent Builder", "summary": "Build declarative agents inside Microsoft 365 Copilot using natural language", "estimatorHarness": null },
-    { "code": "copilot-studio", "family": "build", "name": "Copilot Studio", "summary": "Create custom agents with natural language or a graphical interface", "estimatorHarness": "copilot-studio-standard", "followUp": "Ask whether the agent will run on the standard harness or the GitHub Copilot harness; this selects the estimator." },
-    { "code": "foundry",        "family": "build", "name": "Microsoft Foundry", "summary": "Develop agents on a pro-code platform with full control over engines, models, and Azure-scale infrastructure", "estimatorHarness": null }
+    {
+      "code": "m365-copilot",
+      "family": "use",
+      "name": "Microsoft 365 Copilot",
+      "summary": "Get answers, draft content, and surface insights with AI chat and built-in agents",
+      "estimatorHarness": null
+    },
+    {
+      "code": "cowork",
+      "family": "use",
+      "name": "Cowork",
+      "summary": "Delegate multi-step Microsoft 365 work, including schedules, event triggers, and approvals",
+      "estimatorHarness": "cowork"
+    },
+    {
+      "code": "scout",
+      "family": "use",
+      "name": "Scout",
+      "summary": "Always-on personal Autopilot across desktop, browser, local files, and Microsoft 365",
+      "estimatorHarness": null
+    },
+    {
+      "code": "agent-builder",
+      "family": "build",
+      "name": "Agent Builder",
+      "summary": "Build declarative agents inside Microsoft 365 Copilot using natural language",
+      "estimatorHarness": null
+    },
+    {
+      "code": "copilot-studio",
+      "family": "build",
+      "name": "Copilot Studio",
+      "summary": "Create custom agents with natural language or a graphical interface",
+      "estimatorHarness": "copilot-studio-standard",
+      "followUp": "Ask whether the agent will run on the standard harness or the GitHub Copilot harness; this selects the estimator."
+    },
+    {
+      "code": "foundry",
+      "family": "build",
+      "name": "Microsoft Foundry",
+      "summary": "Develop agents on a pro-code platform with full control over engines, models, and Azure-scale infrastructure",
+      "estimatorHarness": null
+    }
   ],
   "questions": [
-    { "id": "start", "text": "What do you want to do?", "options": [
-      { "code": "use",     "text": "Get work done with an agent", "next": "use.style" },
-      { "code": "build",   "text": "Build my own agent", "next": "build.skill" },
-      { "code": "explore", "text": "I'm exploring what's possible with agents", "next": null, "outcome": "explore" } ] },
-
-    { "id": "use.style", "text": "How do you want the work to happen?", "options": [
-      { "code": "interactive", "text": "I'll ask questions and work through it myself", "next": "use.shape" },
-      { "code": "handoff",     "text": "Hand off the whole task and give me the result", "next": "use.shape" } ] },
-    { "id": "use.shape", "text": "What kind of work is it?", "options": [
-      { "code": "general",     "text": "General help - brainstorm, find info, catch up on email or meetings, draft and edit documents", "next": "use.scope" },
-      { "code": "specialized", "text": "Interactive specialized work - deep research, data analysis, meeting facilitation, or translation while I stay in the loop", "next": "use.scope" },
-      { "code": "oneshot",     "text": "One-shot deliverable - finish a multi-step job and hand back the result", "next": "use.scope" },
-      { "code": "recurring",   "text": "Recurring or event-triggered - schedules, inbox/Teams triggers, or repeating briefings", "next": "use.scope" },
-      { "code": "autopilot",   "text": "Always-on personal Autopilot - proactive monitoring and follow-through over time", "next": "use.scope" },
-      { "code": "unsure",      "text": "Not sure yet", "next": "use.scope" } ] },
-    { "id": "use.scope", "text": "Where does the work live?", "options": [
-      { "code": "m365",   "text": "Inside Microsoft 365 - email, meetings, files, Teams", "next": null },
-      { "code": "beyond", "text": "Microsoft 365 plus my desktop, browser, local files, and command line", "next": null },
-      { "code": "unsure", "text": "Not sure yet", "next": null } ] },
-
-    { "id": "build.skill", "text": "How do you want to build?", "options": [
-      { "code": "natural-language", "text": "Describe it in natural language inside Microsoft 365 Copilot", "next": "build.needs" },
-      { "code": "low-code",         "text": "Natural language or a graphical designer, with connectors, flows and channels", "next": "build.needs" },
-      { "code": "pro-code",         "text": "Code, with full control over models, orchestration and infrastructure", "next": "build.needs" } ] },
-    { "id": "build.needs", "text": "What does the agent need to do?", "options": [
-      { "code": "knowledge",  "text": "Answer from knowledge sources and documents", "next": null },
-      { "code": "actions",    "text": "Take actions: tools, flows, connectors, MCP servers, autonomous triggers", "next": null },
-      { "code": "custom-ai",  "text": "Custom models, evaluation pipelines or multi-agent orchestration at Azure scale", "next": null } ] }
+    {
+      "id": "start",
+      "text": "Where would you like to begin?",
+      "options": [
+        {
+          "code": "use",
+          "text": "Help me find the right place to get work done",
+          "next": "use.style"
+        },
+        {
+          "code": "build",
+          "text": "I'd like to build a custom agent with specific requirements",
+          "next": "q1"
+        },
+        {
+          "code": "explore",
+          "text": "I'm exploring what's possible with agents",
+          "outcome": "explore"
+        }
+      ]
+    },
+    {
+      "id": "use.style",
+      "text": "How hands-on do you want to be?",
+      "options": [
+        {
+          "code": "interactive",
+          "text": "I'll ask questions and work through it myself",
+          "next": "use.task"
+        },
+        {
+          "code": "handoff",
+          "text": "Hand off the whole task and give me the result",
+          "next": "use.cadence"
+        }
+      ]
+    },
+    {
+      "id": "use.task",
+      "text": "What kind of task is it?",
+      "options": [
+        {
+          "code": "general",
+          "text": "General help - brainstorm, find info, catch up on email or meetings, draft and edit documents",
+          "outcome": "m365-copilot"
+        },
+        {
+          "code": "specialized",
+          "text": "Interactive specialized work - deep research, data analysis, meeting facilitation, or translation while I stay in the loop",
+          "outcome": "m365-copilot"
+        }
+      ]
+    },
+    {
+      "id": "use.cadence",
+      "text": "How should the work run?",
+      "options": [
+        {
+          "code": "oneshot",
+          "text": "One-shot deliverable - finish a multi-step job and hand back the result",
+          "next": "use.reach"
+        },
+        {
+          "code": "recurring",
+          "text": "Recurring or event-triggered - schedules, inbox/Teams triggers, or repeating briefings",
+          "next": "use.reach"
+        },
+        {
+          "code": "alwayson",
+          "text": "Always-on personal Autopilot - proactive monitoring and follow-through over time",
+          "next": "use.reach"
+        },
+        {
+          "code": "unsure",
+          "text": "Not sure yet",
+          "next": "use.reach"
+        }
+      ]
+    },
+    {
+      "id": "use.reach",
+      "text": "Where does it need to reach?",
+      "options": [
+        {
+          "code": "m365",
+          "text": "Inside Microsoft 365 - email, meetings, files, Teams"
+        },
+        {
+          "code": "cross",
+          "text": "Microsoft 365 plus my desktop, browser, local files, and command line"
+        },
+        {
+          "code": "unsure",
+          "text": "Not sure yet"
+        }
+      ]
+    },
+    {
+      "id": "q1",
+      "text": "Who is building this agent?",
+      "options": [
+        {
+          "code": "q1a",
+          "text": "Business user or subject matter expert — no coding experience",
+          "scores": {
+            "agent-builder": 3,
+            "copilot-studio": 2,
+            "foundry": 0
+          },
+          "next": "q8"
+        },
+        {
+          "code": "q1b",
+          "text": "Low-code maker or IT professional — comfortable with drag-and-drop tools and configuration",
+          "scores": {
+            "agent-builder": 1,
+            "copilot-studio": 3,
+            "foundry": 0
+          },
+          "next": "q8"
+        },
+        {
+          "code": "q1c",
+          "text": "Professional developer — writes code and builds software",
+          "scores": {
+            "agent-builder": 0,
+            "copilot-studio": 2,
+            "foundry": 3
+          },
+          "next": "q8"
+        },
+        {
+          "code": "q1d",
+          "text": "Data scientist or AI/ML engineer — works with AI models and data infrastructure",
+          "scores": {
+            "agent-builder": 0,
+            "copilot-studio": 2,
+            "foundry": 3
+          },
+          "next": "q8"
+        }
+      ]
+    },
+    {
+      "id": "q8",
+      "text": "Who will use this agent?",
+      "options": [
+        {
+          "code": "q8a",
+          "text": "Me or a small internal team — quick agent for a bounded group",
+          "scores": {
+            "agent-builder": 3,
+            "copilot-studio": 2,
+            "foundry": 1
+          },
+          "next": "q2"
+        },
+        {
+          "code": "q8c",
+          "text": "A department or broad internal audience — many employees need a managed agent",
+          "scores": {
+            "agent-builder": 1,
+            "copilot-studio": 3,
+            "foundry": 2
+          },
+          "next": "q2"
+        },
+        {
+          "code": "q8b",
+          "text": "External users — customers, partners, or the public",
+          "scores": {
+            "agent-builder": 0,
+            "copilot-studio": 3,
+            "foundry": 3
+          },
+          "next": "q2",
+          "zero": [
+            "agent-builder",
+            "m365-copilot"
+          ],
+          "why": "External user audience — Agent Builder and M365 Copilot cannot publish externally"
+        },
+        {
+          "code": "q8d",
+          "text": "Not decided yet",
+          "scores": {
+            "agent-builder": 2,
+            "copilot-studio": 2,
+            "foundry": 1
+          },
+          "next": "q2"
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "text": "Where will users interact with this agent?",
+      "options": [
+        {
+          "code": "q2a",
+          "text": "Inside Microsoft 365 Copilot chat — stay on Copilot's orchestrator and models (Microsoft365.com, Office.com, or Teams)",
+          "scores": {
+            "agent-builder": 3,
+            "copilot-studio": 3,
+            "foundry": 2
+          },
+          "next": "q4"
+        },
+        {
+          "code": "q2b",
+          "text": "In a custom app you host — own endpoints, models, or runtime control (website, mobile, or backend service)",
+          "scores": {
+            "agent-builder": 0,
+            "copilot-studio": 3,
+            "foundry": 3
+          },
+          "next": "q4",
+          "zero": [
+            "agent-builder"
+          ],
+          "why": "Custom app deployment — Agent Builder can only run inside Microsoft 365"
+        },
+        {
+          "code": "q2c",
+          "text": "Running automatically in the background — triggered by events, not by a person chatting with it",
+          "scores": {
+            "agent-builder": 0,
+            "copilot-studio": 3,
+            "foundry": 3
+          },
+          "next": "q4",
+          "zero": [
+            "agent-builder"
+          ],
+          "why": "Background execution — Agent Builder has no event-driven or autonomous capabilities"
+        },
+        {
+          "code": "q2d",
+          "text": "Multiple places, or not decided yet",
+          "scores": {
+            "agent-builder": 1,
+            "copilot-studio": 3,
+            "foundry": 3
+          },
+          "next": "q4"
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "text": "What should this agent do?",
+      "options": [
+        {
+          "code": "q4a",
+          "text": "Answer questions in a single exchange — Q&A, lookups, or summaries",
+          "scores": {
+            "agent-builder": 3,
+            "copilot-studio": 3,
+            "foundry": 1
+          },
+          "next": "q3"
+        },
+        {
+          "code": "q4b",
+          "text": "Have a back-and-forth conversation and remember context",
+          "scores": {
+            "agent-builder": 2,
+            "copilot-studio": 3,
+            "foundry": 2
+          },
+          "next": "q3"
+        },
+        {
+          "code": "q4e",
+          "text": "Create or analyze content inside Copilot — documents, charts, images, or lightweight data analysis",
+          "scores": {
+            "agent-builder": 3,
+            "copilot-studio": 3,
+            "foundry": 2
+          },
+          "next": "q3"
+        },
+        {
+          "code": "q4c",
+          "text": "Complete multi-step tasks — follow a process, check multiple systems, or take actions like submitting forms or updating records",
+          "scores": {
+            "agent-builder": 0,
+            "copilot-studio": 3,
+            "foundry": 3
+          },
+          "next": "q3",
+          "zero": [
+            "agent-builder"
+          ],
+          "why": "Multi-step action workflows — Agent Builder cannot submit forms, update records, or take actions across systems"
+        },
+        {
+          "code": "q4d",
+          "text": "Manage complex workflows — coordinate multiple agents or handle long-running processes",
+          "scores": {
+            "agent-builder": 0,
+            "copilot-studio": 3,
+            "foundry": 3
+          },
+          "next": "q3",
+          "zero": [
+            "agent-builder",
+            "m365-copilot"
+          ],
+          "why": "Complex agent orchestration — Agent Builder and M365 Copilot are not suitable for multi-agent or long-running orchestration"
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "text": "What information does this agent need to access?",
+      "options": [
+        {
+          "code": "q3a",
+          "text": "Microsoft 365 content — SharePoint, OneDrive, Teams, Outlook, or people data",
+          "scores": {
+            "agent-builder": 3,
+            "copilot-studio": 2,
+            "foundry": 1
+          }
+        },
+        {
+          "code": "q3b",
+          "text": "Business systems already available through Microsoft 365 Copilot connectors — like Jira, ServiceNow, GitHub, or Azure DevOps",
+          "scores": {
+            "agent-builder": 2,
+            "copilot-studio": 3,
+            "foundry": 2
+          }
+        },
+        {
+          "code": "q3c",
+          "text": "Dataverse, custom connectors, or direct business APIs your team can expose to the agent",
+          "scores": {
+            "agent-builder": 0,
+            "copilot-studio": 3,
+            "foundry": 2
+          },
+          "zero": [
+            "agent-builder"
+          ],
+          "why": "Direct business system integration — Agent Builder cannot directly connect to Dataverse, custom connectors, or business APIs"
+        },
+        {
+          "code": "q3d",
+          "text": "A mix — Microsoft 365 content plus connector-backed business systems",
+          "scores": {
+            "agent-builder": 2,
+            "copilot-studio": 3,
+            "foundry": 2
+          }
+        },
+        {
+          "code": "q3e",
+          "text": "Public websites or uploaded files — scoped web sources, PDFs, Office files, or other embedded content",
+          "scores": {
+            "agent-builder": 3,
+            "copilot-studio": 2,
+            "foundry": 1
+          }
+        },
+        {
+          "code": "q3f",
+          "text": "Custom RAG, Azure AI Search, private indexes, Foundry IQ knowledge bases, or large-scale retrieval managed by engineering",
+          "scores": {
+            "agent-builder": 0,
+            "copilot-studio": 1,
+            "foundry": 3
+          },
+          "zero": [
+            "agent-builder"
+          ],
+          "why": "Custom retrieval architecture — Agent Builder cannot directly use custom RAG, Azure AI Search, private indexes, Foundry IQ, or engineering-managed retrieval systems"
+        }
+      ]
+    },
+    {
+      "id": "q9",
+      "text": "Who should operate the agent runtime?",
+      "options": [
+        {
+          "code": "q9a",
+          "text": "Microsoft should manage the agent runtime, sandbox, tools, and Power Platform governance",
+          "scores": {},
+          "prefer": "copilot-studio",
+          "over": "foundry"
+        },
+        {
+          "code": "q9d",
+          "text": "Our engineering team should own the code runtime, framework, endpoints, networking, identity, memory, or retrieval",
+          "scores": {},
+          "zero": [
+            "agent-builder",
+            "copilot-studio"
+          ],
+          "why": "Developer-owned runtime — Agent Builder and Copilot Studio do not provide an engineering-owned code runtime, framework, endpoint, network, identity, memory, or retrieval architecture"
+        }
+      ]
+    }
   ],
   "rules": [
-    { "when": { "use.shape": ["general"] },                       "outcome": "m365-copilot" },
-    { "when": { "use.shape": ["specialized"] },                   "outcome": "m365-copilot" },
-    { "when": { "use.shape": ["oneshot", "recurring"] },          "outcome": "cowork" },
-    { "when": { "use.shape": ["autopilot"] },                     "outcome": "scout" },
-    { "when": { "use.shape": ["unsure"], "use.scope": ["beyond"] }, "outcome": "scout" },
-    { "when": { "use.shape": ["unsure"], "use.style": ["handoff"] }, "outcome": "cowork" },
-    { "when": { "use.shape": ["unsure"] },                        "outcome": "m365-copilot" },
-    { "when": { "build.skill": ["pro-code"] },                    "outcome": "foundry" },
-    { "when": { "build.needs": ["custom-ai"] },                   "outcome": "foundry" },
-    { "when": { "build.skill": ["natural-language"], "build.needs": ["knowledge"] }, "outcome": "agent-builder" },
-    { "when": { "build.skill": ["natural-language", "low-code"] }, "outcome": "copilot-studio" }
+    {
+      "when": {
+        "use.reach": [
+          "cross"
+        ]
+      },
+      "outcome": "scout"
+    },
+    {
+      "when": {
+        "use.reach": [
+          "m365"
+        ],
+        "use.cadence": [
+          "oneshot",
+          "recurring",
+          "alwayson"
+        ]
+      },
+      "outcome": "cowork"
+    },
+    {
+      "when": {
+        "use.style": [
+          "handoff"
+        ]
+      },
+      "outcome": "cowork",
+      "pair": "scout"
+    }
   ],
-  "note": "The 'use' branch mirrors the live advisor. The 'build' branch questions are derived from the advisor's platform descriptions and must be verified against the site; rules evaluate top to bottom, first match wins."
+  "scoring": {
+    "platforms": [
+      "agent-builder",
+      "m365-copilot",
+      "copilot-studio",
+      "foundry"
+    ],
+    "alwaysZero": [
+      "m365-copilot"
+    ],
+    "alwaysZeroWhy": "You are building a custom agent - Microsoft 365 Copilot is where you use ready-made agents (choose \"Help me find the right place to get work done\" for that).",
+    "maxScore": 15,
+    "thresholds": [
+      {
+        "min": 12,
+        "max": 15,
+        "label": "Strong fit",
+        "description": "This platform is well-aligned with your requirements across all dimensions."
+      },
+      {
+        "min": 8,
+        "max": 11,
+        "label": "Good fit",
+        "description": "This platform meets most of your requirements with minor tradeoffs."
+      },
+      {
+        "min": 4,
+        "max": 7,
+        "label": "Partial fit",
+        "description": "This platform can address your scenario but may require workarounds."
+      },
+      {
+        "min": 0,
+        "max": 3,
+        "label": "Not recommended",
+        "description": "This platform is unlikely to meet your requirements in this scenario."
+      }
+    ],
+    "preferences": [
+      {
+        "when": {
+          "q1": [
+            "q1d"
+          ]
+        },
+        "prefer": "copilot-studio",
+        "over": "agent-builder",
+        "rationale": "Copilot Studio is recommended over Agent Builder for data scientists and AI/ML engineers because it supports curated model selection, agent evaluations, Foundry IQ integration, managed reasoning, portable skills, and more flexible orchestration — capabilities that Agent Builder does not offer. Use Foundry when the scenario requires a custom model or developer-owned runtime."
+      },
+      {
+        "when": {
+          "q9": [
+            "q9a"
+          ]
+        },
+        "prefer": "copilot-studio",
+        "over": "foundry",
+        "rationale": "Copilot Studio is recommended because you want Microsoft to manage the reasoning harness, sandbox, tools, and Power Platform governance. Choose Foundry when your engineering team needs to own the runtime and infrastructure."
+      }
+    ],
+    "tiebreakers": [
+      {
+        "when": {
+          "q1": [
+            "q1c"
+          ]
+        },
+        "platforms": [
+          "agent-builder",
+          "copilot-studio"
+        ],
+        "prefer": "copilot-studio",
+        "rationale": "When the builder is a professional developer and scores are equal, Copilot Studio is the better fit — it supports code-first authoring via the VS Code extension while Agent Builder is no-code only."
+      },
+      {
+        "when": {
+          "q1": [
+            "q1d"
+          ]
+        },
+        "platforms": [
+          "copilot-studio",
+          "foundry"
+        ],
+        "prefer": "copilot-studio",
+        "rationale": "When the builder is a data scientist or AI/ML engineer and scores are equal, Copilot Studio is preferred for time-to-value. Foundry still wins when the conditional runtime distinction requires engineering ownership."
+      }
+    ],
+    "pairThreshold": 2,
+    "pairs": [
+      {
+        "platforms": [
+          "copilot-studio",
+          "foundry"
+        ],
+        "rationale": "Choose Copilot Studio when Microsoft should manage the reasoning harness, sandbox, tools, and Power Platform governance. Choose Foundry when your team must own the code runtime, framework, endpoint, network, identity, memory, or retrieval architecture.",
+        "whyNot": "Prefer {winner} when its strengths match your answers; keep {runner} for the complementary lane rather than forcing one platform to do both."
+      },
+      {
+        "platforms": [
+          "agent-builder",
+          "copilot-studio"
+        ],
+        "rationale": "Agent Builder for quick no-code Microsoft 365 knowledge helpers; Copilot Studio when you need actions, governance, broader audience, or multi-channel publish.",
+        "whyNot": "{winner} fits the current scope better than {runner}; graduate from Builder to Studio when actions, ALM, or department-wide governance appear."
+      }
+    ],
+    "runtime": {
+      "question": "q9",
+      "compare": [
+        "copilot-studio",
+        "foundry"
+      ],
+      "threshold": 2
+    },
+    "notes": [
+      {
+        "when": {
+          "q2": [
+            "q2c"
+          ],
+          "q4": [
+            "q4a"
+          ]
+        },
+        "note": "You selected a background, event-driven agent but also chose simple Q&A. Background agents typically process events automatically rather than answering user questions. Consider whether your agent is event-driven or conversational."
+      },
+      {
+        "when": {
+          "q8": [
+            "q8b"
+          ],
+          "q2": [
+            "q2a"
+          ]
+        },
+        "note": "You selected external users but want the agent inside Microsoft 365 apps. External users typically can't access your organization's Teams, SharePoint, or Outlook. Your agent may need a custom web deployment to reach them."
+      },
+      {
+        "when": {
+          "q1": [
+            "q1a"
+          ],
+          "q4": [
+            "q4d"
+          ]
+        },
+        "note": "Multi-agent business orchestration in Copilot Studio is low-code, but designing child agents, A2A connections, and long-running processes still benefits from maker or IT partnership. For code-first multi-agent systems, partner with professional developers on Foundry."
+      },
+      {
+        "when": {
+          "q1": [
+            "q1a"
+          ],
+          "q3": [
+            "q3c"
+          ]
+        },
+        "note": "Direct business system integrations like Dataverse, custom connectors, or APIs usually require technical expertise to configure. Consider whether your IT or development team will help set up data access for the agent."
+      },
+      {
+        "when": {
+          "q1": [
+            "q1a"
+          ],
+          "q3": [
+            "q3f"
+          ]
+        },
+        "note": "Custom retrieval architectures like Azure AI Search, private indexes, Foundry IQ, or large-scale RAG usually require engineering expertise. Consider partnering with your development or data platform team before building the agent."
+      },
+      {
+        "when": {
+          "q1": [
+            "q1b"
+          ],
+          "q3": [
+            "q3f"
+          ]
+        },
+        "note": "Custom retrieval (Azure AI Search, private indexes, Foundry IQ, large-scale RAG) usually needs engineering partnership even for low-code makers. Plan Foundry or platform-team support for indexes, ACLs, and retrieval quality — or stay on Copilot Studio connectors when simpler grounding is enough."
+      },
+      {
+        "when": {
+          "q1": [
+            "q1c"
+          ],
+          "q4": [
+            "q4a"
+          ]
+        },
+        "note": "Professional developers building simple Q&A in Microsoft 365 often get more value from Agent Builder or a Microsoft 365 Agents Toolkit declarative agent (source control, API plugins, CI/CD on Copilot's orchestrator) than from a full Foundry custom engine. Escalate to Foundry only when you need your own runtime, models, or retrieval architecture."
+      }
+    ],
+    "winnerNotes": [
+      {
+        "winner": "foundry",
+        "when": {
+          "q1": [
+            "q1a"
+          ]
+        },
+        "note": "Microsoft Foundry is the right platform for this scenario, but it requires professional development skills and Azure expertise. Consider partnering with your development team to build and maintain this agent."
+      },
+      {
+        "winner": "foundry",
+        "when": {
+          "q1": [
+            "q1b"
+          ]
+        },
+        "note": "Microsoft Foundry fits this scenario's runtime needs, but it is a pro-code Azure platform. Low-code makers usually partner with professional developers for hosted agents, private networking, and custom retrieval — or stay on Copilot Studio when maker-led delivery is enough."
+      },
+      {
+        "winner": "copilot-studio",
+        "when": {
+          "q1": [
+            "q1a"
+          ],
+          "q3": [
+            "q3c",
+            "q3f"
+          ]
+        },
+        "note": "Copilot Studio can deliver this scenario, but Dataverse, custom connectors, APIs, or custom retrieval usually need IT or maker partnership for setup, ALM, and ongoing governance — plan that support before you build alone."
+      },
+      {
+        "winner": "copilot-studio",
+        "when": {
+          "q1": [
+            "q1a"
+          ],
+          "q4": [
+            "q4c",
+            "q4d"
+          ]
+        },
+        "note": "Copilot Studio is the right low-code home for actions and multi-agent business processes, but complex workflows still benefit from IT or maker partnership for connectors, environment strategy, and Copilot Credits governance."
+      },
+      {
+        "winner": "agent-builder",
+        "when": {
+          "q8": [
+            "q8c"
+          ]
+        },
+        "note": "Agent Builder fits lightweight Microsoft 365 knowledge agents, but a department-wide audience usually outgrows Builder sharing and governance. Plan a path to Copilot Studio for managed deployment, DLP, and lifecycle controls."
+      },
+      {
+        "winner": "scout",
+        "when": {},
+        "note": "Microsoft Scout is a Frontier preview. Confirm Frontier enrollment, Intune policy, attestation, and GitHub Copilot licensing before you rely on it — access is gated and capabilities can change."
+      }
+    ],
+    "callouts": [
+      {
+        "winners": [
+          "agent-builder",
+          "copilot-studio"
+        ],
+        "when": {
+          "q8": [
+            "q8a"
+          ],
+          "q3": [
+            "q3a"
+          ],
+          "q4": [
+            "q4a",
+            "q4b",
+            "q4e"
+          ]
+        },
+        "label": "Consider SharePoint agents first",
+        "summary": "For Q&A on a single SharePoint site or library, a SharePoint agent may be enough — no-code, grounded in that site, and available in SharePoint, Teams, and Microsoft 365 Copilot. Site owners/admins enable agents; escalate to Agent Builder or Copilot Studio when you need multi-site grounding, actions, or broader governance.",
+        "url": "https://support.microsoft.com/office/get-started-with-sharepoint-agents-69e2faf9-2c1e-4baa-8305-23e625021bcf"
+      },
+      {
+        "winners": [
+          "copilot-studio",
+          "foundry"
+        ],
+        "when": {
+          "q1": [
+            "q1c"
+          ],
+          "q2": [
+            "q2a"
+          ],
+          "q4": [
+            "q4c",
+            "q4b",
+            "q4e"
+          ]
+        },
+        "label": "Microsoft 365 Agents Toolkit (declarative) may fit better",
+        "summary": "Pro-dev + Microsoft 365 Copilot chat + API/actions often means a declarative agent or API plugin with Adaptive Cards and CI/CD — still on Copilot's orchestrator. Evaluate the Agents Toolkit before committing to a custom-engine Foundry path. Toolkit is unscored guidance in this advisor, not a fourth scored winner.",
+        "url": "https://learn.microsoft.com/microsoft-365/copilot/extensibility/agents-overview"
+      },
+      {
+        "winners": [
+          "agent-builder"
+        ],
+        "when": {
+          "q1": [
+            "q1c"
+          ]
+        },
+        "label": "Prefer Agents Toolkit for pro-dev lifecycle",
+        "summary": "Agent Builder is no-code only. Professional developers who need source control, API plugins, Adaptive Cards, or CI/CD while staying on the Microsoft 365 Copilot orchestrator should use the Microsoft 365 Agents Toolkit rather than stretching Builder — or move to Copilot Studio for governed low-code actions.",
+        "url": "https://learn.microsoft.com/microsoft-365/copilot/extensibility/agents-overview"
+      }
+    ],
+    "harness": [
+      {
+        "when": {
+          "q9": [
+            "q9d"
+          ]
+        },
+        "harness": null,
+        "label": null
+      },
+      {
+        "when": {
+          "q4": [
+            "q4d",
+            "q4e"
+          ]
+        },
+        "harness": "copilot-studio-github",
+        "label": "GitHub Copilot harness",
+        "tagline": "Managed adaptive execution for reasoning-heavy, multi-step work"
+      },
+      {
+        "when": {
+          "q2": [
+            "q2c"
+          ]
+        },
+        "harness": "copilot-studio-standard",
+        "label": "Copilot Studio workflow",
+        "tagline": "Deterministic automation with triggers, branching, AI actions, and agent handoffs"
+      },
+      {
+        "when": {
+          "q4": [
+            "q4c"
+          ]
+        },
+        "harness": "copilot-studio-standard",
+        "label": "Copilot Studio workflow",
+        "tagline": "Deterministic automation with triggers, branching, AI actions, and agent handoffs"
+      },
+      {
+        "when": {
+          "q2": [
+            "q2a"
+          ],
+          "q4": [
+            "q4a"
+          ]
+        },
+        "harness": "copilot-studio-standard",
+        "label": "Copilot chat harness",
+        "tagline": "Internal knowledge extensions inside Microsoft 365 Copilot Chat"
+      },
+      {
+        "when": {},
+        "harness": "copilot-studio-standard",
+        "label": "Standard harness",
+        "tagline": "Predictable topic-driven conversations and explicit rules"
+      }
+    ],
+    "shortLabels": {
+      "q1": "Who builds it",
+      "q8": "Who uses it",
+      "q2": "Where it runs",
+      "q4": "What it does",
+      "q3": "What data it needs",
+      "q9": "Who runs the runtime"
+    }
+  },
+  "note": "Generated by deploy/import_advisor.py from the public Agent Platform Advisor scoring matrix (apa.yaml 1.4, guidance verified 2026-08). Do not edit by hand; rerun the importer."
 }
