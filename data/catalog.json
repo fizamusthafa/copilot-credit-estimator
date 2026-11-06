@@ -1,5 +1,5 @@
 {
-  "version": "2026.11.1",
+  "version": "2026.11.2",
   "harnesses": [
     {
       "code": "copilot-studio-standard",
@@ -81,21 +81,21 @@
   "complexityBands": [
     {
       "code": "low",
-      "name": "Low",
-      "description": "Single-turn, at most one tool"
+      "name": "Light",
+      "description": "Light use or light work, as Microsoft's planning model defines it for each product"
     },
     {
       "code": "medium",
       "name": "Medium",
-      "description": "Multi-turn, 2-4 tools or knowledge lookups"
+      "description": "Medium use or medium work"
     },
     {
       "code": "high",
-      "name": "High",
-      "description": "Long-running, many tools, reasoning-heavy"
+      "name": "Heavy",
+      "description": "Heavy use or heavy work"
     }
   ],
-  "note": "Cowork personas, intensities and working days follow Microsoft's Copilot Credit planning model (https://aka.ms/CopilotCreditPlanningModel). The generic personas, modalities and bands for the other products must be verified against the live multi-product estimator before rate values are filled in.",
+  "note": "Cowork, the Copilot harness, Contact Center Intelligence (Customer Assist), Teams Phone Agent, Copilot Managed Runtime for Apps and the WorkIQ API follow Microsoft's Copilot Credit planning model (https://aka.ms/CopilotCreditPlanningModel): a light, medium or heavy rate or range per unit, 22 working days a month. The generic light/core/power personas are not used for pricing. Copilot Code is not priced yet, as in Microsoft's estimator.",
   "coworkPersonas": [
     {
       "code": "knowledge",
