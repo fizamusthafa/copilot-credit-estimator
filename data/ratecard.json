@@ -1,13 +1,14 @@
 {
-  "version": "2026.10.1",
+  "version": "2026.11.1",
   "currency": "USD",
   "creditUnitPrice": 0.01,
   "sources": [
     "https://microsoft.github.io/copilot-studio-estimator/",
-    "https://nptnlopppecostweb.azurewebsites.net/#/estimator"
+    "https://nptnlopppecostweb.azurewebsites.net/#/estimator",
+    "https://aka.ms/CopilotCreditPlanningModel"
   ],
   "disclaimer": "Informational estimate only. Not a binding offer nor a guarantee of final cost. Actual consumption varies by region, workload, users and other factors.",
-  "effectiveFrom": "2026-10-01",
+  "effectiveFrom": "2026-11-06",
   "effectiveTo": null,
   "meters": [
     { "code": "CS_STD_TOOL_INVOCATION",  "harness": "copilot-studio-standard", "name": "Agent tool invocation (Prompt, Agent flow, Computer use, Custom connector, MCP, REST API)", "unit": "invocation per user", "credits": 5,    "licenseNegatable": true,  "status": "published" },
@@ -18,7 +19,7 @@
     { "code": "CS_STD_PROMPT_STANDARD",  "harness": "copilot-studio-standard", "name": "Prompt modifier - Standard", "unit": "prompt run", "credits": null, "licenseNegatable": true, "status": "to-confirm" },
     { "code": "CS_STD_PROMPT_PREMIUM",   "harness": "copilot-studio-standard", "name": "Prompt modifier - Premium",  "unit": "prompt run", "credits": null, "licenseNegatable": true, "status": "to-confirm" },
     { "code": "CS_GH_SESSION",           "harness": "copilot-studio-github",   "name": "GitHub Copilot harness - session by complexity band", "unit": "session", "credits": null, "bands": { "low": null, "medium": null, "high": null }, "status": "to-confirm" },
-    { "code": "COWORK_TASK",             "harness": "cowork",                  "name": "Cowork - delegated task by complexity band", "unit": "task", "credits": null, "bands": { "low": null, "medium": null, "high": null }, "status": "to-confirm" },
+    {"code": "COWORK_USER_DAY", "harness": "cowork", "name": "Cowork - credits per person per working day by persona and intensity (low and high end of Microsoft's planning range)", "unit": "person working day", "credits": null, "bands": {"knowledge-light-low": 100, "knowledge-light-high": 280, "knowledge-medium-low": 280, "knowledge-medium-high": 400, "knowledge-heavy-low": 400, "knowledge-heavy-high": 700, "leader-light-low": 140, "leader-light-high": 390, "leader-medium-low": 390, "leader-medium-high": 560, "leader-heavy-low": 560, "leader-heavy-high": 980, "customer-light-low": 260, "customer-light-high": 720, "customer-medium-low": 720, "customer-medium-high": 1030, "customer-heavy-low": 1030, "customer-heavy-high": 1800, "technical-light-low": 70, "technical-light-high": 190, "technical-medium-low": 190, "technical-medium-high": 270, "technical-heavy-low": 270, "technical-heavy-high": 480}, "licenseNegatable": false, "status": "published", "note": "Microsoft Copilot Credit planning model, Cowork persona data (https://aka.ms/CopilotCreditPlanningModel). Monthly credits = people x 22 working days x rate. Cowork needs a Microsoft 365 Copilot licence; its credits are billed on top."},
     { "code": "CCI_CONVERSATION",        "harness": "contact-center-intelligence", "name": "Contact Center Intelligence - conversation by modality", "unit": "conversation", "credits": null, "modalities": { "chat": null, "voice": null }, "status": "to-confirm" },
     { "code": "TEAMS_PHONE_CALL",        "harness": "teams-phone-agent",       "name": "Teams Phone Agent - handled call", "unit": "call", "credits": null, "status": "to-confirm" },
     { "code": "CMR_APPS_REQUEST",        "harness": "copilot-managed-runtime", "name": "Copilot Managed Runtime for Apps - request", "unit": "request", "credits": null, "status": "to-confirm" },
